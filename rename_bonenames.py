@@ -82,6 +82,7 @@ def renameBonesMain(context):
 class ConvertBonesNameByCSV(bpy.types.Operator):
     bl_idname = "uiler.convertbonesnamebycsv"
     bl_label = "Convert"
+    bl_description = "Convert bone names"
     bl_options = {'REGISTER', 'UNDO'}
 
     def validate(self, context):

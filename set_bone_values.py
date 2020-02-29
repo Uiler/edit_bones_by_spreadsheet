@@ -102,7 +102,8 @@ def set_values_main(context):
 ########################################################
 class SetBoneValuesByCSV(bpy.types.Operator):
     bl_idname = "uiler.setbonevaluesbycsv"
-    bl_label = "Convert"
+    bl_label = "SetValue"
+    bl_description = "Set values"
     bl_options = {'REGISTER', 'UNDO'}
 
     def validate(self, context):

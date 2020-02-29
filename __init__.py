@@ -1,6 +1,9 @@
 import bpy
 
 from . import common
+from . import rename_bonenames
+from . import set_bone_values
+from . import export_csv
 
 bl_info = {
     "name": "Edit bones by spreadsheet",
@@ -36,15 +39,15 @@ class EditBonesBySpreadSheetProperties(bpy.types.PropertyGroup):
     it = []
     it.append((_NAME_CONVERT_ORIGINAL, _NAME_CONVERT_ORIGINAL, "Execute snap on current frame.", "", 0))
     it.append((_NAME_CONVERT_REPLACED, _NAME_CONVERT_REPLACED, "Execute snap on keyframe points between range.", "", 1))
-    name_convert_type = bpy.props.EnumProperty(items=it, default=_NAME_CONVERT_ORIGINAL)
+    name_convert_type: bpy.props.EnumProperty(items=it, default=_NAME_CONVERT_ORIGINAL)
 
     it2 = []
     it2.append((_WRITE_CSV_CLEAN, _WRITE_CSV_CLEAN, "Clean CSV file and write new data.", "", 0))
 #     it2.append((_WRITE_CSV_ADD, _WRITE_CSV_ADD, "Add new data to CSV file.Existing values is not updated.","", 1))
     it2.append((_WRITE_CSV_UPDATE, _WRITE_CSV_UPDATE, "Update data on CSV file except name.If bone name is not exist, add new row to CSV file.", "", 2))
-    csv_export_type = bpy.props.EnumProperty(items=it2, default=_WRITE_CSV_UPDATE)
+    csv_export_type: bpy.props.EnumProperty(items=it2, default=_WRITE_CSV_UPDATE)
 
-    convert_table = bpy.props.StringProperty(name="convert_table", description="Table file of CSV for converting bones data.", default="//convert_table.csv", subtype='FILE_PATH')
+    convert_table: bpy.props.StringProperty(name="convert_table", description="Table file of CSV for converting bones data.", default="//convert_table.csv", subtype='FILE_PATH')
 
 
 def _defProperties():
@@ -62,7 +65,7 @@ class EditBonesBySpreadSheet(bpy.types.Panel):
     bl_idname = "UILER_EDIT_BONES_BY_SPREAD_SHEET_UI_PT_layout"
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'UI'
-#     bl_category = ""
+    bl_category = "EBSS"
 #     bl_context = ""
 
     @classmethod
@@ -88,7 +91,7 @@ class EditBonesBySpreadSheet(bpy.types.Panel):
         row = col.row(align=True)
         row.prop(propgrp, "csv_export_type", expand=True)
 #         row = col.row()
-        col.operator("uiler.writebonevaluesbycsv", text="Export CSV", icon="LOAD_FACTORY")
+        col.operator("uiler.writebonevaluesbycsv", text="Export CSV", icon="EXPORT")
 
         box = layout.box()
         row = box.row()
@@ -107,47 +110,27 @@ class EditBonesBySpreadSheet(bpy.types.Panel):
         row.operator("uiler.setbonevaluesbycsv", text="Set Hide", icon="PLAY")
 
 
+classes = (
+    EditBonesBySpreadSheet,
+    EditBonesBySpreadSheetProperties,
+    export_csv.WriteBoneValuesByCSV,
+    rename_bonenames.ConvertBonesNameByCSV,
+    set_bone_values.SetBoneValuesByCSV,
+)
+
+
 def register():
-    bpy.utils.register_class(EditBonesBySpreadSheetProperties)
+    from bpy.utils import register_class
+    for cls in classes:
+        register_class(cls)
+
     _defProperties()
-    bpy.utils.register_module(__name__)
 
 
 def unregister():
-    bpy.utils.unregister_class(EditBonesBySpreadSheetProperties)
-    bpy.utils.unregister_module(__name__)
-
-
-# classes = (
-#     RenameBoneNamePropGrp,
-#     RenameBoneItemsPropGrp,
-#     SetupBendyBoneProperties,
-# )
-
-# classes2 = (
-#     AddFunction,
-#     BendyBonePoseConfirmOperation,
-#     DownFunction,
-#     UpFunction,
-# )
-
-
-# def register():
-#     from bpy.utils import register_class
-#     for cls in classes:
-#         register_class(cls)
-#     for cls in classes2:
-#         register_class(cls)
-
-#     _defProperties()
-
-
-# def unregister():
-#     from bpy.utils import unregister_class
-#     for cls in classes:
-#         unregister_class(cls)
-#     for cls in classes2:
-#         unregister_class(cls)
+    from bpy.utils import unregister_class
+    for cls in classes:
+        unregister_class(cls)
 
 
 if __name__ == "__main__":

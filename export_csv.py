@@ -150,6 +150,7 @@ def write_csv_main(context):
 class WriteBoneValuesByCSV(bpy.types.Operator):
     bl_idname = "uiler.writebonevaluesbycsv"
     bl_label = "Export CSV"
+    bl_description = "Export csv file"    
     bl_options = {'REGISTER', 'UNDO'}
 
     def validate(self, context):

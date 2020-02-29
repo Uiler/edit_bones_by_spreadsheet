@@ -41,7 +41,8 @@ class BoneNameElements:
 # return BoneNameElements
 def getNameElements(bone):
 
-    nonNumberNm = bone.basename
+    # nonNumberNm = bone.basename
+    nonNumberNm = re.split("\.(?=[0-9]+$)", bone.name)[0]
     num = bone.name.replace(nonNumberNm, "")
     baseNm = ""
     mirrBoneNm = None
