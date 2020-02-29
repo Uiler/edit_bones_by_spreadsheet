@@ -1,6 +1,12 @@
 ボーンの名前と表示・非表示をCSVファイルに記載した情報によって変換するアドオンです。<br/>
 MikuMikuDanceやMayaのHumanIKのボーン名はBlenderの左右対称命名規則に当てはまらず、ミラー編集ができません。<br/>
 そのような時、このアドオンでボーン名を一時的に左右対称な名前に変換し、作業後に元の名前に戻すという使い方を想定しています。<br/>
+
+|Version|DL|Blender|
+|---|---|---|
+|0.1|https://github.com/Uiler/edit_bones_by_spreadsheet/releases/tag/v0.1|2.7.9|
+|0.2|製作中|2.81|
+
 <br/>
 [チュートリアル動画]https://youtu.be/61QXbOFOzBE
 
