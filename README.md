@@ -5,7 +5,7 @@ MikuMikuDanceやMayaのHumanIKのボーン名はBlenderの左右対称命名規�
 |Version|DL|Blender|
 |---|---|---|
 |0.1|https://github.com/Uiler/edit_bones_by_spreadsheet/releases/tag/v0.1|2.7.9|
-|0.2|製作中|2.81|
+|0.2|https://github.com/Uiler/edit_bones_by_spreadsheet/releases/tag/v0.2|2.81|
 
 <br/>
 [チュートリアル動画]https://youtu.be/61QXbOFOzBE
